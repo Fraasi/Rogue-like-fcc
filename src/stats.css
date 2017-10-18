@@ -1,0 +1,47 @@
+@import url(https://fonts.googleapis.com/css?family=Short+Stack);
+
+
+/* style modal also here*/
+.modal-content {
+	font-family: 'Short Stack', cursive;
+	color: lightgoldenrodyellow;
+}
+
+#statsdiv {
+	font-family: 'Short Stack', cursive;
+	font-size: 14px;
+	background-color: rgb(51,51,51);
+	padding: 10px 10px 0px 10px;
+	height: 394px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+  grid-template-rows: 100px 100px 140px;
+	color: lightgoldenrodyellow;
+}
+
+#stats {
+	text-align: center;
+	grid-column: 1;
+	grid-row: 1 ;
+}
+#cheats {
+	text-align: center;
+	grid-column: 1;
+	grid-row: 2;
+}
+
+#text {
+	height: 120px;
+	background-color: rgb(41,41,41);
+	padding: 3px 0px 3px 5px;
+	grid-column: 1;
+	grid-row: 3;
+	margin-top: 25px;
+	border: 2px dotted black ;
+	border-radius: 10px;
+	overflow: auto;
+}
+#text > p {
+	margin: 5px  0px;
+}

@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+
+body {
+	background: radial-gradient(ellipse at center,  #333333 0%,#333333 50%,#000000 100%); 
+	background-size: 45px 45px; 
+}
+#root {
+	margin: 2% auto;
+	padding: 5px;
+	width: 660px;
+}
+
+.App {
+	border: 2px solid black;
+	line-height: 0px;
+	float: left;
+}
+
+#title {
+	font-size: 20px;
+	font-family: 'Permanent Marker', cursive;
+	color: lightgoldenrodyellow;
+}
+
+#shadow {
+	box-shadow: 3px 3px 20px 3px black;
+}
