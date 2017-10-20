@@ -27,11 +27,11 @@ export default function fillMap(map, subjects) {
 				monsterlife = 75;
 			}
 			if (this.level === 3) {
-				monsterStrength = 20;
+				monsterStrength = 15;
 				monsterlife = 100;
 			}
 			if (this.level === 4) {
-				monsterStrength = 30;
+				monsterStrength = 20;
 				monsterlife = 150;
 			}
 			
@@ -60,6 +60,7 @@ export default function fillMap(map, subjects) {
 		
 	map[10][9] = new Subject('beer');
 	map[10][10] = this.state.protagonist;
+	if (this.level === 4) map[8][1] = new Subject('boss', 200, 1);
 	this.setState({
 		map: map,
 		darkness: true

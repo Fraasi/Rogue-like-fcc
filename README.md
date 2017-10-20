@@ -5,8 +5,9 @@ Under construction
 
 todo:
 
-
-* icon
 * tweak life/damage
-* add boss
+* refactoring
+
+![pic1](alien2.png)
+![pic2](alien1.png)
 

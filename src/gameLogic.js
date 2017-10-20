@@ -6,23 +6,37 @@ import './modal/modalPlugin.css';
 
 const beasts = ['beast', 'foul beast', 'sack of bones', 'enemy', 'skull thingy','poor creature', 'pixels next to you', 'evil monster', 'monster'];
 
-function IfDead(_this, textBox, mush) {
-	textBox.innerHTML = `You're dead! You miserably failed in your perilous adventure.${mush ? '.. to a mushroom.' : ''}`;
-			
+function gameOverModal(win, _this) {
 	if (document.querySelector('.modal-overlay') === null) {
+		let content; 
+		if (win) {
+			content = `Congratulations!<br> You killed the evil Smiley and saved the princess and saved the planet... etc...<br><br>
+			Want to play again?<br><br>
+			<button type="button">Yes!</button>`;
+		} else {
+			content = `Game over!<br>Want to play again?<br><br>
+			<button type="button">Yes!</button><br><br>
+			 If not, you may continue to move around the map, but be warned: There be dragons(bugs) here now!`;
+		}
+		
 		let modal = new Modal({
 			backgroundColor: 'rgb(41,41,41)',
-			content: `Game over!<br>Want to play again?<br><br>
-			<button type="button">Yes!</button><br><br>
-			 If not, you may continue to move around the map, but be warned: There be dragons(bugs) here now!`
+			content: content
 		})
+		
 		modal.show();
 		document.querySelector('.modal-overlay button').onclick = () => {
 			modal.close();
 			document.querySelector('#cheats').style.opacity = 0;
+			_this.state.protagonist.life = 0;
 			_this.resetGameMap();
 		}
 	}
+}
+
+function IfDead(_this, textBox, mush) {
+	textBox.innerHTML = `You're dead! You miserably failed in your perilous adventure.${mush ? '.. to a mushroom.' : ''}`;
+	gameOverModal(false, _this);
 }
 
 
@@ -73,9 +87,9 @@ function _logic(x, y, _this) {
 		_this.state.potions -= 1;
 		textBox.innerHTML = `<p>Found a heart. Life +${cell.strength}!</p>`;
 	}
-	else if (cell.type === 'enemy') {
+	else if (cell.type === 'enemy' || cell.type === 'boss') {
 		let damage = _this.state.protagonist.hitDamage();
-		let monster = beasts[Math.floor(Math.random() * beasts.length)];
+		let monster = cell.type === 'boss' ? 'evil Smiley' : beasts[Math.floor(Math.random() * beasts.length)];
 		cell.life -= damage;
 		if (cell.life <= 0) {
 			_this.state.map[x][y] = 0;
@@ -83,8 +97,9 @@ function _logic(x, y, _this) {
 			_this.state.enemies -= 1;
 			textBox.innerHTML = `<p>You attacked with ${damage} damage and killed the ${monster}. Exp +20</p>`;
 			_levelUp();
+			if (cell.type === 'boss') gameOverModal(true, _this)
 		} else {
-			let monsterDamage = cell.hitDamage();
+			let monsterDamage = cell.type === 'boss' ? _this.state.protagonist.life - 1 : cell.hitDamage();
 			_this.state.protagonist.life -= monsterDamage;
 			if (_this.state.protagonist.life <= 0) {
 				IfDead(_this, textBox);
@@ -135,6 +150,7 @@ function _logic(x, y, _this) {
 			}
 			
 			document.querySelector('.modal-overlay #no').onclick = () => {
+				document.removeEventListener('keydown', enter);
 				modal.close()
 				textBox.innerHTML = '<p>No time for beer just yet!</p>';
 				return;
