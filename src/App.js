@@ -3,7 +3,7 @@ import './App.css';
 import Cell from './Cell';
 import fillMap from './fillMap';
 import Stats from './Stats';
-import _moveLogic from './moveLogic';
+import _gameLogic from './gameLogic';
 import {map1, subjects1, subjectCount1} from './levels/map1';
 import Subject from './Subject';
 
@@ -16,21 +16,21 @@ class App extends Component {
 				potions: 0,
 				enemies: 0,
 				darkness: false,
-				protagonist: new Subject('protagonist', 50, 10, 10, 10)
+				protagonist: new Subject('protagonist', 50, 10, 10, 10),
+				map: this._copy2DArr(map1)
 			};
 			
-			this.map = this._copy2DArr(map1);
-			this.subjects = subjects1;
+			this.subjects = [];
 			this.level = 1;
 			this.height = 400;
 			this.width = 400;
 			this.rows = Math.floor(this.height / 20);
 			this.cols = Math.floor(this.width / 20);
 	}
-
+	
 	componentDidMount() {
 		this.resetGameMap();
-		document.addEventListener('keydown', _moveLogic.bind(this));
+		document.addEventListener('keydown', _gameLogic.bind(this));
 	}
 	
 	_calculateDist(x, y, x2, y2) {
@@ -49,11 +49,8 @@ class App extends Component {
 	}
 	
 	resetGameMap(map = map1, subjects = subjects1, subjectCount = subjectCount1, level = 1) {
-	//still doesnt show items before move
-		//find & delete all subjects from dom
-		document.querySelectorAll('.App > div:not(.true):not(.false)').forEach( sub => sub.className = 'cell false');
 		
-		this.map = this._copy2DArr(map);
+		let mapCopy = this._copy2DArr(map);
 		this.subjects = Array.from(subjects);
 		this.level = level;
 		this.setState({
@@ -61,18 +58,15 @@ class App extends Component {
 				shrooms: subjectCount.shroom,
 				potions: subjectCount.potion,
 				enemies: subjectCount.enemy,
-				darkness: true,
-				protagonist: this.state.protagonist.life >= 0 ? this.state.protagonist : new Subject('protagonist', 50, 10, 10, 10) 
-		}, fillMap.bind(this, this.map, this.subjects))
-
-		document.querySelector(`div[data-xy='${10}.${10}']`).className = 'cell protagonist';
-		document.querySelector(`div[data-xy='${10}.${9}']`).className = 'cell beer'; // otherwise not showing on start
+				darkness: false,
+				protagonist: this.state.protagonist.life > 0 ? this.state.protagonist : new Subject('protagonist', 50, 10, 10, 10)
+		}, fillMap.bind(this, mapCopy, this.subjects))
 	}
 	
   render() {
 		let cellMap = [];
 
-		this.map.forEach( (subArr, x) => {
+		this.state.map.forEach( (subArr, x) => {
 			subArr.forEach( (cell, y) => {
 				let key = `${x}.${y}`;
 				let cellClass;
@@ -110,7 +104,7 @@ class App extends Component {
 
     return (
 			<div id='shadow'>
-				<div id='title'>&emsp;&emsp; Rogue like FCC challenge</div>
+				<div id='title'>Alien adventure (Rogue like fcc challenge)</div>
 				<div className="App" style={{width:`${this.height}px`, height:`${this.width}px`}}>
 					{cellMap}
 				</div>

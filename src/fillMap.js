@@ -1,7 +1,7 @@
 import Subject from './Subject';
 
 export default function fillMap(map, subjects) {
-	
+
 	//acceptable free tiles
 	let freeTiles = [];
 	map.forEach( (cols, x) => {
@@ -20,23 +20,38 @@ export default function fillMap(map, subjects) {
 		let rSubject = Math.floor(Math.random() * subjects.length);
  
 		if (subjects[rSubject] === 'enemy') {
-			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('enemy', 50, 5);
+			let monsterStrength = 5;
+			let monsterlife = 50;
+			if (this.level === 2) {
+				monsterStrength = 10;
+				monsterlife = 75;
+			}
+			if (this.level === 3) {
+				monsterStrength = 20;
+				monsterlife = 100;
+			}
+			if (this.level === 4) {
+				monsterStrength = 30;
+				monsterlife = 150;
+			}
+			
+			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('enemy', monsterlife, monsterStrength);
 			subjects.splice(rSubject, 1);
 			freeTiles.splice(rTile, 1);
 		}
 		else if (subjects[rSubject] === 'potion') {
 			let strength = Math.floor(Math.random() * (20-10+1)+10);
-			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('potion', 10, strength);
+			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('potion', null, strength);
 			subjects.splice(rSubject, 1);
 			freeTiles.splice(rTile, 1)
 		}
 		else if (subjects[rSubject] === 'weapon') {
-			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('weapon', 10);
+			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('weapon');
 			subjects.splice(rSubject, 1);
 			freeTiles.splice(rTile, 1)
 		}
 		else if (subjects[rSubject] === 'shroom') {
-			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('shroom', 10);
+			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('shroom');
 			subjects.splice(rSubject, 1);
 			freeTiles.splice(rTile, 1)
 		}
@@ -44,4 +59,10 @@ export default function fillMap(map, subjects) {
 	while (subjects.length > 0)
 		
 	map[10][9] = new Subject('beer');
+	map[10][10] = this.state.protagonist;
+	this.setState({
+		map: map,
+		darkness: true
+	})
+	// console.log('fill', map);
 }

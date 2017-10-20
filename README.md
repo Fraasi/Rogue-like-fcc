@@ -5,7 +5,8 @@ Under construction
 
 todo:
 
-* move map to state
-* level up monsters
+
+* icon
+* tweak life/damage
 * add boss
 

@@ -27,7 +27,7 @@ class Stats extends Component {
 					<button id='toggleButton' onClick={this.props.toggleDarkness} >Toggle darkness</button>
 				</div>
 				<div id='text'>
-					<p>Arrow keys to move. Find items, kill monsters. Drink beer for next level. Boss is in level ?</p>
+					<p>Arrow keys to move.<br />Find items, kill monsters. Drink beer for next level.<br /> Boss is in level #4</p>
 				</div>
 			</div>
 		)
