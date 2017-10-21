@@ -1,12 +1,12 @@
 
 ### Fcc Rogue like challenge repo
 
-Under construction
-
 todo:
 
-* tweak life/damage
+* tweak monster life/damage
 * refactoring
+
+Play the game [here.]()
 
 ![pic1](alien2.png)
 ![pic2](alien1.png)
