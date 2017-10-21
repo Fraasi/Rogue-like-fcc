@@ -1,5 +1,5 @@
 {
-  "name": "Alien adventure rogue_like",
+  "name": "rogue_like",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,5 +12,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+	"homepage" : "https://fraasi.github.io/Rogue-like-fcc/"
 }
