@@ -5,7 +5,7 @@ todo:
 
 * refactoring
 
-Play the game [here.]("https://fraasi.github.io/Rogue-like-fcc/")
+Play the game [here.](https://fraasi.github.io/Rogue-like-fcc/)
 
 ![pic1](alien2.png)
 ![pic2](alien1.png)
