@@ -10,7 +10,7 @@ function gameOverModal(win, _this) {
 	if (document.querySelector('.modal-overlay') === null) {
 		let content; 
 		if (win) {
-			content = `Congratulations!<br> You killed the evil Smiley and saved the princess and saved the planet... etc...<br><br>
+			content = `Congratulations!<br> You killed the evil Smiley and saved the princess and the planet... etc...<br><br>
 			Want to play again?<br><br>
 			<button type="button">Yes!</button>`;
 		} else {
@@ -38,7 +38,6 @@ function IfDead(_this, textBox, mush) {
 	textBox.innerHTML = `You're dead! You miserably failed in your perilous adventure.${mush ? '.. to a mushroom.' : ''}`;
 	gameOverModal(false, _this);
 }
-
 
 function _logic(x, y, _this) {
 	let cell = _this.state.map[x][y];
@@ -75,11 +74,11 @@ function _logic(x, y, _this) {
 		_levelUp();
 	}
 	else if (cell.type === 'weapon') {
-		_this.state.protagonist.weapon *= 1.3;
+		_this.state.protagonist.weapon *= cell.strength;
 		_this.state.weapons -= 1;
 		_this.state.protagonist.hitDamage();
 		_this.state.map[x][y] = 0;
-		textBox.innerHTML = `<p>Found ${cell.type}, damage increased by *1.3</p>`;
+		textBox.innerHTML = `<p>Found ${cell.type}, damage increased by *${cell.strength}</p>`;
 	}
 	else if (cell.type === 'potion') {
 		_this.state.protagonist.life += cell.strength;
@@ -123,7 +122,7 @@ function _logic(x, y, _this) {
 				document.removeEventListener('keydown', enter);
 				modal.close();
 				let nextLevel = _this.level + 1;
-				textBox.innerHTML = `<p>Beer, sweet beer... You suddenly find yourself in level #${nextLevel} and have no idea how you got here.</p>`;
+				textBox.innerHTML = `<p>Beer, sweet beer... You suddenly find yourself in level #${nextLevel} ${nextLevel === 4 ? '...and out of beer, you can\'t drink yourself out of this level.' : 'and have no idea how you got here.'}</p>`;
 				switch(nextLevel) {
 					case 2:
 						_this.state.protagonist.x = 10;
@@ -148,12 +147,10 @@ function _logic(x, y, _this) {
 				}
 				document.querySelector('#cheats').style.opacity = 0;
 			}
-			
 			document.querySelector('.modal-overlay #no').onclick = () => {
 				document.removeEventListener('keydown', enter);
-				modal.close()
+				modal.close();
 				textBox.innerHTML = '<p>No time for beer just yet!</p>';
-				return;
 			}
 			document.querySelector('.modal-overlay #yes').onclick = yesEnter;
 			function enter(e) {

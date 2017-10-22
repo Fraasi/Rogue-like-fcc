@@ -3,7 +3,7 @@ import Subject from './Subject';
 export default function fillMap(map, subjects) {
 
 	//acceptable free tiles
-	let freeTiles = [];
+	const freeTiles = [];
 	map.forEach( (cols, x) => {
 		cols.forEach( (cell, y) => {
 			if (map[x][y] === 0) {
@@ -34,7 +34,6 @@ export default function fillMap(map, subjects) {
 				monsterStrength = 20;
 				monsterlife = 150;
 			}
-			
 			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('enemy', monsterlife, monsterStrength);
 			subjects.splice(rSubject, 1);
 			freeTiles.splice(rTile, 1);
@@ -46,7 +45,7 @@ export default function fillMap(map, subjects) {
 			freeTiles.splice(rTile, 1)
 		}
 		else if (subjects[rSubject] === 'weapon') {
-			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('weapon');
+			map[freeTiles[rTile][0]][freeTiles[rTile][1]] = new Subject('weapon', null, 1.3);
 			subjects.splice(rSubject, 1);
 			freeTiles.splice(rTile, 1)
 		}
@@ -60,7 +59,11 @@ export default function fillMap(map, subjects) {
 		
 	map[10][9] = new Subject('beer');
 	map[10][10] = this.state.protagonist;
-	if (this.level === 4) map[8][1] = new Subject('boss', 200, 1);
+	
+	if (this.level === 4) {
+		map[8][1] = new Subject('boss', 200, 1);
+		map[10][9] = 0;
+	}
 	this.setState({
 		map: map,
 		darkness: true

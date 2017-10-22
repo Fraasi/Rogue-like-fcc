@@ -1,10 +1,6 @@
 
 ### Fcc Rogue like challenge repo
 
-todo:
-
-* refactoring
-
 Play the game [here.](https://fraasi.github.io/Rogue-like-fcc/)
 
 ![pic1](alien2.png)
@@ -16,7 +12,7 @@ Play the game [here.](https://fraasi.github.io/Rogue-like-fcc/)
 
 **Note to future self & others who struggle to host create react app in github.**
 
-[These docs](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages) didn't work for me as `npm install --save gh-pages` threw some errors in my window machine and running `npm run deploy` just crashed my cmd window.
+[These docs](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages) didn't work for me as `npm install --save-dev gh-pages` threw some errors in my windows machine and running `npm run deploy` just crashed the whole cmd window.
 
 Easy enough fix:
 
@@ -24,4 +20,4 @@ Easy enough fix:
 * npm run build
 * change build folder name to docs
 * push to github
-* change github page settings to run from 'master branch/docs folder'
+* change github pages setting to run from 'master branch/docs folder'

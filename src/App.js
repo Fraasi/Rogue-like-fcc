@@ -18,9 +18,7 @@ class App extends Component {
 				darkness: false,
 				protagonist: new Subject('protagonist', 50, 10, 10, 10),
 				map: this._copy2DArr(map1)
-			};
-			
-			this.subjects = [];
+			};		
 			this.level = 1;
 			this.height = 400;
 			this.width = 400;
@@ -50,8 +48,8 @@ class App extends Component {
 	
 	resetGameMap(map = map1, subjects = subjects1, subjectCount = subjectCount1, level = 1) {
 		
-		let mapCopy = this._copy2DArr(map);
-		this.subjects = Array.from(subjects);
+		const mapCopy = this._copy2DArr(map);
+		const subjectsCopy = Array.from(subjects);
 		this.level = level;
 		this.setState({
 				weapons: subjectCount.weapon,
@@ -60,11 +58,11 @@ class App extends Component {
 				enemies: subjectCount.enemy,
 				darkness: false,
 				protagonist: this.state.protagonist.life > 0 ? this.state.protagonist : new Subject('protagonist', 50, 10, 10, 10)
-		}, fillMap.bind(this, mapCopy, this.subjects))
+		}, fillMap.bind(this, mapCopy, subjectsCopy))
 	}
 	
   render() {
-		let cellMap = [];
+		const cellMap = [];
 
 		this.state.map.forEach( (subArr, x) => {
 			subArr.forEach( (cell, y) => {

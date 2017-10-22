@@ -4,7 +4,7 @@ import './stats.css';
 class Stats extends Component {
 	
 	toggleCheat() {
-		let div = document.getElementById('cheats');
+		const div = document.getElementById('cheats');
 		if (div.style.opacity === '0') div.style.opacity = '1';
 		else div.style.opacity = '0';
 	}
