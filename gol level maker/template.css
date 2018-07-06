@@ -1,0 +1,78 @@
+body {
+	color: rgb(47, 79, 79);
+	color: rgb(70, 130, 180);
+	background: 
+	linear-gradient(135deg, rgba(0,0,0,0) 25% , rgba(70, 130, 180, 0.5) 25%, rgba(70, 130, 180, 0.5) 75%, rgba(0,0,0,0) 75% ),
+	linear-gradient(45deg, white 25%, lightsteelblue 25%, lightsteelblue 75%,  white 75%);
+	background-size: 30px 30px;	
+}
+
+#root {
+	width: 600px;
+	margin: 2% auto 0px auto;
+}
+
+h3, .statsAndSave {
+	text-shadow: 0px 0px 10px white;
+	color: darkslategrey;
+}
+
+h3 {
+	font-family: 'Acme', sans-serif;
+	text-align: center;
+	width: 600px;
+	margin: 2% auto 15px auto;
+}
+
+.buttons {
+	width: 600px;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	justify-items: center;
+}
+button {
+	font-family: 'Bree Serif', serif;
+	width: 100px;
+	background-color: darkslategrey;
+	color: lightsteelblue;
+}
+button:hover {
+	background-color: #375d5d;
+}
+
+#grid {
+	box-shadow: 0px 0px 10px 3px black;
+	border: 2px solid black;
+	line-height: 0px;
+}
+
+.statsAndSave {
+	font-family: 'Bree Serif', serif;
+	text-align: center;
+	width: 600px;
+	margin: 2% auto 0px auto;
+}
+.stats {
+	display: inline-block;
+	width: 330px;
+}
+
+.cell {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	border: 1px solid black;
+}
+
+.cell:hover {
+	opacity: 0.5;
+}
+
+.false {
+	background-color: darkslategrey;
+}
+
+.true {
+	background-color: lightsteelblue;
+}
